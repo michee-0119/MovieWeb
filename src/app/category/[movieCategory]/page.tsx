@@ -1,0 +1,78 @@
+import { DynamicPagination } from "@/app/_components/DynamicPagination";
+import { movieApi } from "@/utils/tmdb";
+import Image from "next/image";
+import Link from "next/link";
+
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ movieCategory: string }>;
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { movieCategory } = await params;
+  const { page } = await searchParams;
+  const currentPage = page ? parseInt(page) : 1;
+  const movies: any = await movieApi(movieCategory, currentPage);
+
+  const title = movieCategory.includes("popular")
+    ? "Popular"
+    : movieCategory.includes("upcoming")
+      ? "Upcoming"
+      : "Top rated";
+
+  return (
+    <div className="flex flex-col min-h-screen p-4 gap-5">
+      <div className="w-full max-w-97.5 mx-auto md:max-w-300">
+        <div className="flex flex-col gap-6 ">
+          <p className="text-[20px] font-semibold">{title}</p>
+
+          <div
+            // className=" grid grid-cols-2 gap-5 md:grid-cols-4 lg:grid-cols-5"
+              className={`grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6`}
+
+          >
+            {movies?.results?.map((films: any) => (
+              <Link key={films.id} href={`/movie/${films.id}`}>
+                <div className="rounded-lg overflow-hidden bg-white shadow-md hover:scale-105 transition-transform duration-200">
+                  <div className="relative w-full aspect-[2/3]">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${films.poster_path}`}
+                      alt={films.original_title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div className="bg-gray-200 p-2">
+                    <div className="flex items-center gap-1 mb-1">
+                      <Image
+                        src="/Star.png"
+                        alt="star"
+                        width={12}
+                        height={12}
+                      />
+                      <span className="text-[11px]">
+                        {films.vote_average?.toFixed(1)}
+                      </span>
+                      <span className="opacity-50 text-[11px]">/10</span>
+                    </div>
+
+                    <p className="text-[12px] font-medium truncate">
+                      {films.original_title}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <DynamicPagination
+            totalPage={
+              movies?.total_pages > 500 ? 500 : movies?.total_pages || 1
+            }
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
