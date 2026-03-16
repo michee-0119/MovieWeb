@@ -2,7 +2,7 @@ import { Film, Mail, Phone } from "lucide-react";
 export const Footer = () => {
   return (
     <div className="w-full  bg-[#4338CA] px-20 py-10 justify-center flex">
-      <div className="w-[1280px] flex justify-between max-sm:px-4 max-sm:p-4.5 max-sm:gap-7 max-sm:flex-col">
+      <div className="w-[1280px] flex justify-between max-sm: max-sm: max-sm:gap-7 max-sm:flex-col">
         <div className="w-61.75 h-13 flex gap-1 flex-col ">
           <div className="flex  flex-col md:flex items-start max-sm:gap-2">
             <div className="flex items-center gap-1 ">
@@ -51,7 +51,7 @@ export const Footer = () => {
             <div className="text-base font-medium text-[#fafafa]">
               Follow us
             </div>
-            <div className="flex text-base font-medium flex-row gap-3 text-[#fafafa] max-sm:flex-col">
+            <div className="flex text-base font-medium flex-row gap-3 text-[#fafafa] max-sm:p-0 max-sm:flex-col">
               <div>Facebook</div>
               <div>Instegram</div>
               <div>Twitter</div>

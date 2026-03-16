@@ -5,7 +5,7 @@ export async function getGenres() {
     `https://api.themoviedb.org/3/genre/movie/list?language=en`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
       },
       cache: "force-cache",
     },
@@ -19,7 +19,7 @@ export async function searchMovies(query: string) {
     `${TMDB_BASE_URL}/search/movie?query=${query}&language=en-US&page=1`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
       },
       cache: "force-cache",
     },
@@ -33,7 +33,7 @@ export async function discoverMovies(genreIds: string, page: number = 1) {
 
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
     },
   });
   return res.json();
@@ -49,7 +49,7 @@ export async function movieApi(
 
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
     },
     cache: "force-cache",
   });
@@ -60,7 +60,7 @@ export async function movieApi(
 export async function getMovieDetail(movieId: string) {
   const res = await fetch(`${TMDB_BASE_URL}/movie/${movieId}?language=en-US`, {
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
     },
     cache: "force-cache",
   });
@@ -72,7 +72,7 @@ export async function getMovieCredits(movieId: string) {
     `${TMDB_BASE_URL}/movie/${movieId}/credits?language=en-US`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
       },
       cache: "force-cache",
     },
@@ -86,7 +86,7 @@ export async function getMovieVideos(movieId: string) {
     `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
       },
       cache: "force-cache",
     },
@@ -97,7 +97,7 @@ export async function getMovieVideos(movieId: string) {
 export async function getSimilarMovies(id: string, page: number = 1) {
   const res = await fetch(`${TMDB_BASE_URL}/movie/${id}/similar?page=${page}`, {
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
     },
     cache: "force-cache",
   });

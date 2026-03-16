@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { CarouselPlugin } from "./PlayCarousel";
 import { Upcoming } from "./UpComing";
 
-
-
 export type Movie = {
   id: number;
   title: string;
@@ -21,7 +19,7 @@ export type Movie = {
 
 export type Results = {
   results: Movie[];
-  total_pages?: number; 
+  total_pages?: number;
 };
 
 export type movieCategory = "popular" | "upcoming" | "top_rated";
@@ -38,7 +36,7 @@ const movieApi = async (
 
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_KEY}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_MOVIE_KEY}`,
       "Content-Type": "application/json",
     },
   });
@@ -68,7 +66,6 @@ export const MovieCard = ({ genreId }: { genreId?: number }) => {
 
   return (
     <div className="flex justify-center flex-col items-center w-full">
-     
       <CarouselPlugin results={{ results: popularMovie, total_pages: 1 }} />
 
       <div className="p-5 md:px-20 mb-12.5 gap-8 flex justify-center items-center flex-col w-full">
